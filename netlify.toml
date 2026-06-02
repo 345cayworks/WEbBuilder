@@ -1,0 +1,19 @@
+# Netlify deployment configuration for the Cayworks WebBuilder Workspace
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# SPA fallback: every route serves index.html so React Router can handle it
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Security headers (sensible defaults for an internal admin tool)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
